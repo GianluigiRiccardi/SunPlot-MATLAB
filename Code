@@ -1,0 +1,65 @@
+% SunPlot - Gianluigi Riccardi
+% Stylized sun with rays using trigonometric geometry
+% Copyright 2025
+
+% Central circle (Sun)
+theta = linspace(0, 2*pi, 200);
+x_circle = cos(theta);
+y_circle = sin(theta);
+
+% Sun rays (triangles)
+n_rays = 12;
+ray_length = 1.4;
+ray_width = 0.3;
+angles = linspace(0, 2*pi, n_rays + 1);
+
+x_rays = [];
+y_rays = [];
+
+for a = angles(1:end-1)
+    % Tip of the ray
+    x_tip = ray_length * cos(a);
+    y_tip = ray_length * sin(a);
+    
+    % Base of the ray
+    x_base1 = cos(a + ray_width);
+    y_base1 = sin(a + ray_width);
+    
+    x_base2 = cos(a - ray_width);
+    y_base2 = sin(a - ray_width);
+    
+    x_rays = [x_rays; [x_tip, x_base1, x_base2]];
+    y_rays = [y_rays; [y_tip, y_base1, y_base2]];
+end
+
+% Plot
+figure('Color','w');
+hold on
+
+% Draw rays
+for i = 1:size(x_rays, 1)
+    fill(x_rays(i,:), y_rays(i,:), [1 0.8 0.2], 'EdgeColor', 'k') % yellow-orange rays
+end
+
+% Draw central Sun
+fill(x_circle, y_circle, 'yellow', 'EdgeColor', 'k')
+
+% Appearance settings
+grid on
+axis equal
+axis on
+xlim([-2 2])
+ylim([-2 2])
+set(gca, 'XColor', [0.7 0.7 0.7], 'YColor', [0.7 0.7 0.7], 'GridColor', [0.85 0.85 0.85])
+
+% Signature at the bottom
+annotation('textbox', [0.35, 0.02, 0.3, 0.05], ...
+    'String', 'By Gianluigi Riccardi', ...
+    'FontSize', 10, ...
+    'FontAngle', 'italic', ...
+    'HorizontalAlignment', 'center', ...
+    'EdgeColor', 'none', ...
+    'Color', [0.6 0 0])
+
+% Optional: export image
+exportgraphics(gcf, 'sun_plot.png', 'Resolution', 300)
