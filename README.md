@@ -27,4 +27,4 @@ This project is licensed under the MIT License. You can freely use, remix, and s
 ## ✍️ Author
 
 **Gianluigi Riccardi**  
-*Engineer & AI enthusiast focused on predictive maintenance with MATLAB and Simulink.*
+*UnderEngineer & AI enthusiast focused on predictive maintenance with MATLAB and Simulink.*
